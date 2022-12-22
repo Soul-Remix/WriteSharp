@@ -30,12 +30,12 @@ public class TooWordyTest
             {
                 Index = 3,
                 Offset = 9,
-                Reason = "abundance is too wordy"
+                Reason = "\"abundance\" is too wordy"
             },new()
             {
                 Index = 27,
                 Offset = 9,
-                Reason = "accede to is too wordy"
+                Reason = "\"accede to\" is too wordy"
             }
         };
         
@@ -53,12 +53,12 @@ public class TooWordyTest
             {
                 Index = 0,
                 Offset = 11,
-                Reason = "a number of is too wordy"
+                Reason = "\"a number of\" is too wordy"
             },new()
             {
                 Index = 87,
                 Offset = 8,
-                Reason = "impacted is too wordy"
+                Reason = "\"impacted\" is too wordy"
             }
         };
         
@@ -96,12 +96,12 @@ public class TooWordyTest
             {
                 Index = 0,
                 Offset = 14,
-                Reason = "a   number \nof is too wordy"
+                Reason = "\"a   number \nof\" is too wordy"
             },new()
             {
                 Index = 38,
                 Offset = 11,
-                Reason = "a number of is too wordy"
+                Reason = "\"a number of\" is too wordy"
             }
         };
         

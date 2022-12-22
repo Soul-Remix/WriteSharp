@@ -3,7 +3,7 @@ using WriteSharp.Interfaces;
 
 namespace WriteSharp.Checks;
 
-public class TooWordy : IChecker
+internal class TooWordy : IChecker
 {
     private readonly Regex _regex;
 
@@ -267,7 +267,7 @@ public class TooWordy : IChecker
             {
                 Index = match.Index,
                 Offset = match.Length,
-                Reason = $"{match.Value} is too wordy"
+                Reason = $"\"{match.Value}\" is too wordy"
             };
             results.Add(result);
         }
