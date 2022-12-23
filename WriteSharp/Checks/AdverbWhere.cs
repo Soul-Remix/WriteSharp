@@ -1,8 +1,9 @@
 using System.Text.RegularExpressions;
+using WriteSharp.Interfaces;
 
 namespace WriteSharp.Checks;
 
-public class AdverbWhere
+public class AdverbWhere: IChecker
 {
     private readonly Regex _regex;
 
