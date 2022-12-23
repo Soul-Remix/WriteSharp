@@ -48,4 +48,13 @@ public class NoClichesTest
         };
         Assert.Equal(expected,results);
     }
+    
+    [Fact]
+    public void NoCliches_GoodSentence_NoProblems()
+    {
+        List<CheckResult> results = _noCliches.Check(GoodSentence);
+        List<CheckResult> expected = new List<CheckResult>();
+       
+        Assert.Equal(expected,results);
+    }
 }
