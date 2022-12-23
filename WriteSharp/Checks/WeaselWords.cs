@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace WriteSharp.Checks;
 
-public class WeaselWords
+internal class WeaselWords
 {
     private readonly Regex _regex;
 

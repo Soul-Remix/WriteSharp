@@ -3,7 +3,7 @@ using WriteSharp.Interfaces;
 
 namespace WriteSharp.Checks;
 
-public class AdverbWhere: IChecker
+internal class AdverbWhere: IChecker
 {
     private readonly Regex _regex;
 

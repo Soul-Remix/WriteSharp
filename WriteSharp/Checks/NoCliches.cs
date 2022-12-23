@@ -3,7 +3,7 @@ using WriteSharp.Interfaces;
 
 namespace WriteSharp.Checks;
 
-public class NoCliches : IChecker
+internal class NoCliches : IChecker
 {
     private readonly Regex _regex;
 
