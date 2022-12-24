@@ -1,4 +1,4 @@
-using WriteSharp.Checks;
+using WriteSharp.Types;
 
 namespace WriteSharp.Interfaces;
 

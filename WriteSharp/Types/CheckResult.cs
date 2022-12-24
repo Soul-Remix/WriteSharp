@@ -1,4 +1,4 @@
-namespace WriteSharp.Checks;
+namespace WriteSharp.Types;
 
 public record CheckResult
 {

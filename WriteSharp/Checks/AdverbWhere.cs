@@ -1,9 +1,10 @@
 using System.Text.RegularExpressions;
 using WriteSharp.Interfaces;
+using WriteSharp.Types;
 
 namespace WriteSharp.Checks;
 
-internal class AdverbWhere: IChecker
+internal class AdverbWhere : IChecker
 {
     private readonly Regex _regex;
 
@@ -216,7 +217,7 @@ internal class AdverbWhere: IChecker
             "stuff",
             "things"
         };
-        
+
         string adverbString = String.Join("|", adverbs);
         string weakensString = String.Join("|", weakens);
         _regex = new Regex($"\\b(({adverbString})|({weakensString}))\\b", RegexOptions.IgnoreCase);

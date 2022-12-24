@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using WriteSharp.Checks;
+using WriteSharp.Types;
 using Xunit;
 
 namespace WriteSharp.Test;

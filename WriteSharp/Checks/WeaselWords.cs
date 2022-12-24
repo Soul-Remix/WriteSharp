@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using WriteSharp.Interfaces;
+using WriteSharp.Types;
 
 namespace WriteSharp.Checks;
 
