@@ -8,8 +8,10 @@ namespace WriteSharp.Test;
 public class StartWithSoTest
 {
     private readonly StartWithSo _startWithSo;
-    private const string SentenceStartWithSo = "So, I saw the cute puppy and I picked it up. ";
+    private const string SentenceStartWithSo = "So I saw the cute puppy and I picked it up. ";
     private const string GoodSentence = "The puppy was cute, so I picked it up.";
+    private const string GoodSentenceStartsSo = "So??";
+    private const string SoAfterSemicolonSentence = "This is a test; so it should pass or fail.";
 
     public StartWithSoTest()
     {
@@ -39,5 +41,30 @@ public class StartWithSoTest
         List<CheckResult> results = _startWithSo.Check(GoodSentence);
 
         Assert.Empty(results);
+    }
+    
+    [Fact]
+    public void StartWithSo_GoodSentenceStartsSo()
+    {
+        List<CheckResult> results = _startWithSo.Check(GoodSentenceStartsSo);
+
+        Assert.Empty(results);
+    }
+    
+    [Fact]
+    public void StartWithSo_SoAfterSemicolon()
+    {
+        List<CheckResult> results = _startWithSo.Check(SoAfterSemicolonSentence);
+        List<CheckResult> expected = new List<CheckResult>()
+        {
+            new()
+            {
+                Index = 15,
+                Offset = 2,
+                Reason = "\"so\" adds no meaning"
+            }
+        };
+        
+        Assert.Equal(expected, results);
     }
 }
