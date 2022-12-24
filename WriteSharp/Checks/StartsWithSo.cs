@@ -12,7 +12,7 @@ public class StartWithSo : IChecker
     public StartWithSo()
     {
         _newSentenceRegex = new Regex("([^\n\\.;!?]+)([\\.;!?]+)", RegexOptions.IgnoreCase);
-        _startWithSoRegex = new Regex("^(\\s)*so\\b", RegexOptions.IgnoreCase);
+        _startWithSoRegex = new Regex("^(\\s)*so\\b[\\s\\S]", RegexOptions.IgnoreCase);
     }
 
     public List<CheckResult> Check(string text)
@@ -24,11 +24,16 @@ public class StartWithSo : IChecker
             Match startWithSo = _startWithSoRegex.Match(sentence.Value);
             if (startWithSo.Success)
             {
+                if (startWithSo.Value.ToLower() == "so?")
+                {
+                    continue;
+                }
+
                 CheckResult result = new CheckResult()
                 {
                     Index = startWithSo.Index + sentence.Index,
-                    Offset = startWithSo.Length,
-                    Reason = $"\"{startWithSo.Value}\" adds no meaning"
+                    Offset = 2,
+                    Reason = $"\"{startWithSo.Value.Trim()}\" adds no meaning"
                 };
                 results.Add(result);
             }
