@@ -2,7 +2,7 @@ namespace WriteSharp.Checks;
 
 public record CheckResult
 {
-    public String Reason { get; init; } = "";
+    public String Reason { get; set; } = "";
     public int Index { get; set; }
     public int Offset { get; set; }
 }

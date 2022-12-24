@@ -1,8 +1,9 @@
 using System.Text.RegularExpressions;
+using WriteSharp.Interfaces;
 
 namespace WriteSharp.Checks;
 
-internal class WeaselWords
+internal class WeaselWords : IChecker
 {
     private readonly Regex _regex;
 
