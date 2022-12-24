@@ -68,7 +68,7 @@ public class WriteSharpOptions
         {
             { CheckTypeEnum.AdverbWhere, true },
             { CheckTypeEnum.Duplicates, true },
-            { CheckTypeEnum.EPrime, true },
+            { CheckTypeEnum.EPrime, false },
             { CheckTypeEnum.NoCliches, true },
             { CheckTypeEnum.PassiveVoice, true },
             { CheckTypeEnum.StartWithSo, true },
