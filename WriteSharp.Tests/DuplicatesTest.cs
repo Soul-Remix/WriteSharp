@@ -12,6 +12,8 @@ public class DuplicatesTest
     private const string BadSentenceA = "I saw a a dog.";
     private const string GoodSentence = "What about this? This tastes good.";
     private const string MultipleBadSentences = BadSentenceThis + GoodSentence + BadSentenceA;
+    private const string DuplicatesLineBreak = "This this is a nice day.";
+    private const string DuplicatesNonWord = "// //";
 
     public DuplicatesTest()
     {
@@ -79,6 +81,31 @@ public class DuplicatesTest
     public void Duplicates_GoodSentence()
     {
         List<CheckResult> results = _duplicates.Check(GoodSentence);
+
+        Assert.Empty(results);
+    }
+    
+    [Fact]
+    public void Duplicates_lineBreak()
+    {
+        List<CheckResult> results = _duplicates.Check(DuplicatesLineBreak);
+        List<CheckResult> expected = new List<CheckResult>()
+        {
+            new()
+            {
+                Index = 0,
+                Offset = 9,
+                Reason = "\"This this\" is a duplicate"
+            }
+        };
+
+        Assert.Equal(expected, results);
+    }
+    
+    [Fact]
+    public void Duplicates_NonWord()
+    {
+        List<CheckResult> results = _duplicates.Check(DuplicatesNonWord);
 
         Assert.Empty(results);
     }
