@@ -4,7 +4,7 @@ using WriteSharp.Types;
 
 namespace WriteSharp.Checks;
 
-public class StartWithSo : IChecker
+internal class StartWithSo : IChecker
 {
     private readonly Regex _newSentenceRegex;
     private readonly Regex _startWithSoRegex;

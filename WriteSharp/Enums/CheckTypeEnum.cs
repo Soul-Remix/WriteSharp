@@ -1,6 +1,6 @@
 namespace WriteSharp.Enums;
 
-public enum CheckTypeEnum
+internal enum CheckTypeEnum
 {
     AdverbWhere,
     Duplicates,

@@ -4,7 +4,7 @@ using WriteSharp.Types;
 
 namespace WriteSharp.Checks;
 
-public class Duplicates : IChecker
+internal class Duplicates : IChecker
 {
     private readonly Regex _regex;
 
