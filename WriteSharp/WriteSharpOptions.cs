@@ -1,6 +1,6 @@
 using WriteSharp.Enums;
 
-namespace WriteSharp.Types;
+namespace WriteSharp;
 
 public class WriteSharpOptions
 {
