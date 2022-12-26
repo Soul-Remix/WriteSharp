@@ -18,23 +18,31 @@ public class Program
             description: "A whitelist of words to ignore in the checks"
         );
 
-        var checksToDoOption = new Option<string>(
+        var checksOption = new Option<string>(
             name: "--checks",
-            description: "Specify the checks you want to run"
+            description: "Specify the checks you want to run, Only the tests you specified will run."
+        );
+
+        var noChecksOption = new Option<string>(
+            name: "--no-checks",
+            description:
+            "Specify the checks you don't want to run, All the other checks will run. --no-checks will overwrite --checks"
         );
 
         var rootCommand = new RootCommand("WriteSharp is a linter for english prose and a spell checker");
 
         rootCommand.AddOption(whiteListOption);
-        rootCommand.AddOption(checksToDoOption);
+        rootCommand.AddOption(checksOption);
+        rootCommand.AddOption(noChecksOption);
         rootCommand.AddArgument(textArgument);
 
-        rootCommand.SetHandler((whiteList, checkToDo, text) =>
+        rootCommand.SetHandler((whiteList, checkToDo, checksToSkip, text) =>
         {
             HandleWhiteList(whiteList);
-            HandleCheckToDo(checkToDo);
+            HandleCheck(checkToDo, false);
+            HandleCheck(checksToSkip, true);
             Check(text);
-        }, whiteListOption, checksToDoOption, textArgument);
+        }, whiteListOption, checksOption, noChecksOption, textArgument);
 
         return await rootCommand.InvokeAsync(args);
     }
@@ -48,50 +56,50 @@ public class Program
         Options.WhiteList = list;
     }
 
-    private static void HandleCheckToDo(string checks)
+    private static void HandleCheck(string checks, bool checkValue)
     {
         if (string.IsNullOrWhiteSpace(checks))
         {
             return;
         }
 
-        TurnOffChecks();
-        
+        TurnChecks(checkValue);
+
         var toDo = checks.Split(",");
         foreach (var check in toDo)
         {
             string checkToLower = check.ToLower();
             if (checkToLower == "adverb")
-                Options.AdverbWhere = true;
+                Options.AdverbWhere = !checkValue;
             else if (checkToLower == "duplicates")
-                Options.Duplicates = true;
+                Options.Duplicates = !checkValue;
             else if (checkToLower == "eprime")
-                Options.EPrime = true;
+                Options.EPrime = !checkValue;
             else if (checkToLower == "cliche")
-                Options.NoCliches = true;
+                Options.NoCliches = !checkValue;
             else if (checkToLower == "passive")
-                Options.PassiveVoice = true;
+                Options.PassiveVoice = !checkValue;
             else if (checkToLower == "so")
-                Options.StartWithSo = true;
+                Options.StartWithSo = !checkValue;
             else if (checkToLower == "there-is")
-                Options.ThereIs = true;
+                Options.ThereIs = !checkValue;
             else if (checkToLower == "wordy")
-                Options.TooWordy = true;
-            else if (checkToLower == "weasel") Options.WeaselWords = true;
+                Options.TooWordy = !checkValue;
+            else if (checkToLower == "weasel") Options.WeaselWords = !checkValue;
         }
     }
 
-    private static void TurnOffChecks()
+    private static void TurnChecks(bool value)
     {
-        Options.AdverbWhere = false;
-        Options.Duplicates = false;
-        Options.ThereIs = false;
-        Options.EPrime = false;
-        Options.NoCliches = false;
-        Options.PassiveVoice = false;
-        Options.TooWordy = false;
-        Options.WeaselWords = false;
-        Options.StartWithSo = false;
+        Options.AdverbWhere = value;
+        Options.Duplicates = value;
+        Options.ThereIs = value;
+        Options.EPrime = value;
+        Options.NoCliches = value;
+        Options.PassiveVoice = value;
+        Options.TooWordy = value;
+        Options.WeaselWords = value;
+        Options.StartWithSo = value;
     }
 
     private static void Check(string text)
