@@ -138,3 +138,6 @@ Checks for ["to-be"](https://en.wikipedia.org/wiki/E-Prime) verbs. _Disabled by 
 * [Flesch–Kincaid readability](http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_test)
 * [Fear and Loathing of the English passive](http://www.lel.ed.ac.uk/~gpullum/passive_loathing.pdf)
 * [Words to Avoid in Educational Writing](http://css-tricks.com/words-avoid-educational-writing/)
+
+## License
+MIT
