@@ -15,14 +15,12 @@ public class Program
 
         var whiteListOption = new Option<string>(
             name: "--white-list",
-            description: "A whitelist of words to ignore in the checks",
-            getDefaultValue: () => String.Empty
+            description: "A whitelist of words to ignore in the checks"
         );
 
         var checksToDoOption = new Option<string>(
             name: "--checks",
-            description: "Specify the checks you want to run",
-            getDefaultValue: () => String.Empty
+            description: "Specify the checks you want to run"
         );
 
         var rootCommand = new RootCommand("WriteSharp is a linter for english prose and a spell checker");
@@ -58,28 +56,28 @@ public class Program
         }
 
         TurnOffChecks();
-
+        
         var toDo = checks.Split(",");
         foreach (var check in toDo)
         {
             string checkToLower = check.ToLower();
-            if (checkToLower == "adverb-where")
+            if (checkToLower == "adverb")
                 Options.AdverbWhere = true;
             else if (checkToLower == "duplicates")
                 Options.Duplicates = true;
-            else if (checkToLower == "e-prime")
+            else if (checkToLower == "eprime")
                 Options.EPrime = true;
-            else if (checkToLower == "no-cliche")
+            else if (checkToLower == "cliche")
                 Options.NoCliches = true;
-            else if (checkToLower == "passive-voice")
+            else if (checkToLower == "passive")
                 Options.PassiveVoice = true;
-            else if (checkToLower == "starts-with-so")
+            else if (checkToLower == "so")
                 Options.StartWithSo = true;
             else if (checkToLower == "there-is")
-                Options.StartWithSo = true;
-            else if (checkToLower == "too-wordy")
-                Options.StartWithSo = true;
-            else if (checkToLower == "weasel-words") Options.StartWithSo = true;
+                Options.ThereIs = true;
+            else if (checkToLower == "wordy")
+                Options.TooWordy = true;
+            else if (checkToLower == "weasel") Options.WeaselWords = true;
         }
     }
 
