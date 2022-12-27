@@ -90,7 +90,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IWriteSharp, WriteSharp.WriteSharp>();
+builder.Services.AddSingleton<WriteSharp.WriteSharp, WriteSharp.WriteSharp>();
 
 var app = builder.Build();
 
