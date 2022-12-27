@@ -53,7 +53,7 @@ public class WriteSharp : IWriteSharp
             return list;
         }
 
-        return list.Where(x => !Options.WhiteList.Contains(x.Reason.Substring(1, x.Offset)));
+        return list.Where(x => !whitelist.Contains(x.Reason.Substring(1, x.Offset)));
     }
 
     private IEnumerable<CheckResult> Combine(IEnumerable<CheckResult> list)
