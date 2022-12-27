@@ -19,6 +19,4 @@ public class CheckOptionsDto
     public bool TooWordy { get; set; } = true;
 
     public bool WeaselWords { get; set; } = true;
-
-    public List<string> WhiteList { get; set; } = new List<string>();
 }

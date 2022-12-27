@@ -1,5 +1,8 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WriteSharp.API.Data;
 using WriteSharp.API.DTO;
 using WriteSharp.Types;
 
@@ -10,10 +13,12 @@ namespace WriteSharp.API.Controllers;
 public class CheckController : ControllerBase
 {
     private readonly WriteSharp _writeSharp;
+    private readonly AppDbContext _context;
 
-    public CheckController(WriteSharp writeSharp)
+    public CheckController(WriteSharp writeSharp, AppDbContext context)
     {
         _writeSharp = writeSharp;
+        _context = context;
     }
 
     [HttpGet("free")]
@@ -35,9 +40,26 @@ public class CheckController : ControllerBase
 
     [Authorize]
     [HttpPost("withOptions")]
-    public ActionResult<List<CheckResult>> WithOptionsCheck(CheckOptionsDtoWithText options)
+    public ActionResult<List<CheckResult>> WithOptionsCheck(CheckOptionsDtoComplete options)
     {
-        return _writeSharp.Check(options.text, MapOptions(options));
+        var opt = MapOptions(options);
+        opt.WhiteList = options.WhiteList;
+        return _writeSharp.Check(options.text, opt);
+    }
+
+    [Authorize]
+    [HttpPost]
+    public async Task<ActionResult<List<CheckResult>>> DefaultCheck(CheckOptionsDtoWithText options)
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        var whiteList = await _context.WhiteLists.Where(x => x.UserId.Equals(userId))
+            .Select(x => x.Word)
+            .ToListAsync();
+
+        var opt = MapOptions(options);
+        opt.WhiteList = whiteList;
+        return _writeSharp.Check(options.text, opt);
     }
 
     private WriteSharpOptions MapOptions(CheckOptionsDto options)
@@ -53,7 +75,6 @@ public class CheckController : ControllerBase
             ThereIs = options.ThereIs,
             TooWordy = options.TooWordy,
             WeaselWords = options.WeaselWords,
-            WhiteList = options.WhiteList,
         };
     }
 }
