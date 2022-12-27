@@ -5,7 +5,7 @@ using WriteSharp.Types;
 
 namespace WriteSharp;
 
-public class WriteSharp
+public class WriteSharp : IWriteSharp
 {
     private readonly Dictionary<CheckTypeEnum, IChecker> _checks = new()
     {
